@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Lab - Lessons</title><link rel="stylesheet" href="./style.css"></head>
+<body><main class="wrap"><div class="brand">CYBER LAB</div><div class="sub">Cybersecurity Lessons</div>
+<h1>📖 Cybersecurity Lessons</h1>
+<div class="card"><p id="progressText">0 / 10 lessons completed</p><div class="progress"><div id="progress" class="fill"></div></div></div>
+<div id="lessons"></div>
+<script>
+const data=[
+["What Is Cybersecurity?","Learn how cybersecurity protects systems, networks and information."],
+["Computer Networks","Understand devices, routers, servers and basic network communication."],
+["IP Addresses","Learn the purpose of IP addresses and private versus public addressing."],
+["Linux Fundamentals","Learn basic Linux files, folders and permissions."],
+["Password Security","Understand strong passwords, unique passwords and multi-factor authentication."],
+["Cryptography Basics","Learn the difference between hashing, encryption and encoding."],
+["Web Security Fundamentals","Learn HTTPS, authentication, authorization and input validation."],
+["Social Engineering Awareness","Recognize suspicious messages, impersonation and manipulation."],
+["File Integrity","Learn how hashes can help detect unexpected file changes."],
+["Defensive Security","Learn monitoring, updates, backups and access control."]
+];
+function update(){let n=0;for(let i=1;i<=10;i++)if(localStorage.getItem("lesson"+i)==="done")n++;document.getElementById("progress").style.width=n*10+"%";document.getElementById("progressText").textContent=n+" / 10 lessons completed";data.forEach((x,j)=>{let b=document.getElementById("b"+(j+1));if(b){b.textContent=localStorage.getItem("lesson"+(j+1))==="done"?"Completed ✓":"Mark Complete";}})}
+data.forEach((x,j)=>{let i=j+1;document.getElementById("lessons").innerHTML+=`<div class="lesson"><div class="num">LESSON ${String(i).padStart(2,"0")}</div><h2>${x[0]}</h2><p>${x[1]}</p><button id="b${i}" class="btn" onclick="toggle(${i})">Mark Complete</button></div>`});
+function toggle(i){let k="lesson"+i;if(localStorage.getItem(k)==="done")localStorage.removeItem(k);else localStorage.setItem(k,"done");update()}update();
+</script></main><nav class="nav"><a href="./index.html" class=""><b>⌂</b>Home</a><a href="./lessons.html" class="active"><b>📖</b>Lessons</a><a href="./lab.html" class=""><b>🧪</b>Lab</a><a href="./rules.html" class=""><b>📋</b>Rules</a><a href="./invite.html" class=""><b>👥</b>Invite</a></nav></body></html>

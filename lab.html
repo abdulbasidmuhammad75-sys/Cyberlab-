@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Lab - Practice Lab</title><link rel="stylesheet" href="./style.css"></head>
+<body><main class="wrap"><div class="brand">CYBER LAB</div><div class="sub">Safe Practice Laboratory</div>
+<h1>🧪 Practice Lab</h1>
+<div class="card"><h2>🔐 SHA-256 Hash Generator</h2><p>Generate a SHA-256 hash locally in your browser.</p><input id="text" class="input" placeholder="Type text here"><button class="btn" onclick="hashText()">Generate Hash</button><div id="out" class="output">Your hash appears here.</div></div>
+<div class="card"><h2>🐧 Linux Commands</h2><p><b>pwd</b> — show current directory.</p><p><b>ls</b> — list files.</p><p><b>cd</b> — change directory.</p><p><b>mkdir</b> — create a directory.</p><p><b>cat</b> — display file contents.</p><p><b>cp</b> — copy files.</p><p><b>mv</b> — move or rename files.</p><p><b>chmod</b> — change permissions.</p></div>
+<div class="card"><h2>🌐 Web Security</h2><p>Learn HTTPS, authentication, authorization, input validation, XSS awareness and SQL-injection awareness from a defensive perspective.</p></div>
+<div class="card warning"><h2>⚠️ Safety First</h2><p>Only test systems you own or have explicit permission to test. Never attack real systems.</p></div>
+<script>
+async function hashText(){let t=document.getElementById("text").value;let h=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));document.getElementById("out").textContent=Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,"0")).join("")}
+</script></main><nav class="nav"><a href="./index.html" class=""><b>⌂</b>Home</a><a href="./lessons.html" class=""><b>📖</b>Lessons</a><a href="./lab.html" class="active"><b>🧪</b>Lab</a><a href="./rules.html" class=""><b>📋</b>Rules</a><a href="./invite.html" class=""><b>👥</b>Invite</a></nav></body></html>

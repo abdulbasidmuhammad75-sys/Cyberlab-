@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Lab - Home</title><link rel="stylesheet" href="./style.css"></head>
+<body><main class="wrap"><div class="brand">CYBER LAB</div><div class="sub">Learn • Practice • Protect</div>
+<section class="hero"><h1>Welcome to Cyber Lab 👋</h1><p>Learn cybersecurity through safe, practical and authorized training.</p></section>
+<section class="card"><h2>📊 Learning Progress</h2><p id="progressText">0 / 10 lessons completed</p><div class="progress"><div id="progress" class="fill"></div></div></section>
+<section><h2>Quick Access</h2><div class="grid">
+<a class="card" href="./lessons.html"><div class="icon">📖</div><h3>Lessons</h3><p>Learn cybersecurity fundamentals.</p></a>
+<a class="card" href="./lab.html"><div class="icon">🧪</div><h3>Practice Lab</h3><p>Safe hands-on learning.</p></a>
+<a class="card" href="./rules.html"><div class="icon">📋</div><h3>Rules</h3><p>Learn responsible security.</p></a>
+<a class="card" href="./invite.html"><div class="icon">👥</div><h3>Invite</h3><p>Share Cyber Lab.</p></a>
+</div></section>
+<script>
+(function(){let n=0;for(let i=1;i<=10;i++)if(localStorage.getItem("lesson"+i)==="done")n++;document.getElementById("progress").style.width=(n*10)+"%";document.getElementById("progressText").textContent=n+" / 10 lessons completed";})();
+</script></main><nav class="nav"><a href="./index.html" class="active"><b>⌂</b>Home</a><a href="./lessons.html" class=""><b>📖</b>Lessons</a><a href="./lab.html" class=""><b>🧪</b>Lab</a><a href="./rules.html" class=""><b>📋</b>Rules</a><a href="./invite.html" class=""><b>👥</b>Invite</a></nav></body></html>

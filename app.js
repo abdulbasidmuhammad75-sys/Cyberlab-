@@ -1,0 +1,1 @@
+// Cyber Lab uses simple HTML navigation. No navigation JavaScript is required.

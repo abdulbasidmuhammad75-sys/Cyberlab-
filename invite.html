@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Lab - Invite</title><link rel="stylesheet" href="./style.css"></head>
+<body><main class="wrap"><div class="brand">CYBER LAB</div><div class="sub">Share Cyber Lab</div>
+<h1>👥 Invite Friends</h1>
+<div class="hero"><h2>Share Cyber Lab</h2><p>Invite friends to learn cybersecurity safely.</p></div>
+<div class="card"><h2>Your Link</h2><div id="link" class="linkbox"></div><button class="btn" onclick="copyLink()">Copy Link</button><button class="btn" onclick="shareLink()">Share</button><p id="msg"></p></div>
+<script>
+const link=location.origin+"/index.html";document.getElementById("link").textContent=link;
+async function copyLink(){try{await navigator.clipboard.writeText(link);document.getElementById("msg").textContent="Link copied ✓"}catch(e){document.getElementById("msg").textContent="Copy unavailable in this browser."}}
+async function shareLink(){if(navigator.share){try{await navigator.share({title:"Cyber Lab",text:"Learn cybersecurity safely with Cyber Lab.",url:link})}catch(e){}}else copyLink()}
+</script></main><nav class="nav"><a href="./index.html" class=""><b>⌂</b>Home</a><a href="./lessons.html" class=""><b>📖</b>Lessons</a><a href="./lab.html" class=""><b>🧪</b>Lab</a><a href="./rules.html" class=""><b>📋</b>Rules</a><a href="./invite.html" class="active"><b>👥</b>Invite</a></nav></body></html>
