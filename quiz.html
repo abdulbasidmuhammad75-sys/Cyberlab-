@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Lab - Quiz</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">CYBER LAB V2</p>
+      <h1>🧠 Cybersecurity Quiz</h1>
+      <p>Test your beginner cybersecurity knowledge.</p>
+    </section>
+
+    <section id="quizBox" class="card">
+      <div class="quiz-top">
+        <span id="questionNumber">Question 1 of 10</span>
+        <span id="score">Score: 0</span>
+      </div>
+
+      <h2 id="question">Loading question...</h2>
+
+      <div id="answers"></div>
+
+      <button id="nextBtn" class="primary-btn" style="display:none;">
+        Next Question →
+      </button>
+    </section>
+
+    <section id="resultBox" class="card" style="display:none;">
+      <h2>🎉 Quiz Complete!</h2>
+      <p id="finalScore"></p>
+      <p id="resultMessage"></p>
+
+      <button onclick="restartQuiz()" class="primary-btn">
+        🔄 Try Again
+      </button>
+
+      <a href="./index.html" class="secondary-btn">
+        🏠 Back Home
+      </a>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="./index.html">Home</a>
+    <a href="./lessons.html">Lessons</a>
+    <a href="./lab.html">Lab</a>
+    <a href="./quiz.html" class="active">Quiz</a>
+    <a href="./rules.html">Rules</a>
+  </nav>
+
+<script>
+const questions = [
+  {
+    question: "What does cybersecurity mainly protect?",
+    answers: [
+      "Computer games",
+      "Systems, networks and data",
+      "Only mobile phones",
+      "Only websites"
+    ],
+    correct: 1
+  },
+  {
+    question: "What does HTTPS help provide?",
+    answers: [
+      "A faster battery",
+      "Encrypted communication",
+      "More storage",
+      "Free internet"
+    ],
+    correct: 1
+  },
+  {
+    question: "What is a strong password usually like?",
+    answers: [
+      "123456",
+      "Your first name",
+      "Long and difficult to guess",
+      "password"
+    ],
+    correct: 2
+  },
+  {
+    question: "What is phishing?",
+    answers: [
+      "A type of computer hardware",
+      "A deceptive attempt to steal information",
+      "A programming language",
+      "A backup method"
+    ],
+    correct: 1
+  },
+  {
+    question: "What does SHA-256 produce?",
+    answers: [
+      "A hash value",
+      "A video",
+      "A password manager",
+      "An IP address"
+    ],
+    correct: 0
+  },
+  {
+    question: "Which is safest when learning cybersecurity?",
+    answers: [
+      "Attack random websites",
+      "Test systems without permission",
+      "Use authorized labs and practice environments",
+      "Steal credentials"
+    ],
+    correct: 2
+  },
+  {
+    question: "What is malware?",
+    answers: [
+      "Malicious software",
+      "A security certificate",
+      "A web browser",
+      "A programming editor"
+    ],
+    correct: 0
+  },
+  {
+    question: "What does 2FA add to an account?",
+    answers: [
+      "Another layer of authentication",
+      "More storage",
+      "A faster processor",
+      "Free data"
+    ],
+    correct: 0
+  },
+  {
+    question: "Why should software be updated?",
+    answers: [
+      "To make the phone heavier",
+      "To help fix bugs and security vulnerabilities",
+      "To remove the internet",
+      "To delete all files"
+    ],
+    correct: 1
+  },
+  {
+    question: "What should you do before testing a computer system?",
+    answers: [
+      "Get authorization",
+      "Guess the password",
+      "Delete files",
+      "Disable security"
+    ],
+    correct: 0
+  }
+];
+
+let current = 0;
+let points = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const questionNumberEl = document.getElementById("questionNumber");
+const scoreEl = document.getElementById("score");
+const nextBtn = document.getElementById("nextBtn");
+
+function loadQuestion() {
+  answered = false;
+
+  const q = questions[current];
+
+  questionNumberEl.textContent =
+    `Question ${current + 1} of ${questions.length}`;
+
+  scoreEl.textContent = `Score: ${points}`;
+
+  questionEl.textContent = q.question;
+
+  answersEl.innerHTML = "";
+
+  q.answers.forEach((answer, index) => {
+    const button = document.createElement("button");
+
+    button.className = "quiz-answer";
+    button.textContent = answer;
+
+    button.onclick = () => chooseAnswer(index, button);
+
+    answersEl.appendChild(button);
+  });
+
+  nextBtn.style.display = "none";
+}
+
+function chooseAnswer(index, button) {
+  if (answered) return;
+
+  answered = true;
+
+  const correct = questions[current].correct;
+  const buttons = document.querySelectorAll(".quiz-answer");
+
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+
+    if (i === correct) {
+      btn.classList.add("correct");
+    }
+  });
+
+  if (index === correct) {
+    points++;
+    button.classList.add("correct");
+  } else {
+    button.classList.add("wrong");
+  }
+
+  scoreEl.textContent = `Score: ${points}`;
+  nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+  current++;
+
+  if (current < questions.length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+};
+
+function showResult() {
+  document.getElementById("quizBox").style.display = "none";
+  document.getElementById("resultBox").style.display = "block";
+
+  const percentage = Math.round(
+    (points / questions.length) * 100
+  );
+
+  document.getElementById("finalScore").textContent =
+    `You scored ${points}/${questions.length} (${percentage}%).`;
+
+  document.getElementById("resultMessage").textContent =
+    percentage >= 70
+      ? "🏆 Great job! You passed the beginner quiz."
+      : "📚 Keep learning and try the quiz again.";
+}
+
+function restartQuiz() {
+  current = 0;
+  points = 0;
+
+  document.getElementById("quizBox").style.display = "block";
+  document.getElementById("resultBox").style.display = "none";
+
+  loadQuestion();
+}
+
+loadQuestion();
+</script>
+
+</body>
+  </html>
